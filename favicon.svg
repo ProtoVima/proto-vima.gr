@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#080C14"/>
+  <text x="3" y="24" font-family="Georgia, serif" font-weight="900" font-size="20">
+    <tspan fill="#F1F5F9">Π</tspan><tspan fill="#3B82F6">Β</tspan>
+  </text>
+</svg>
