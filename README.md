@@ -1,1 +1,1 @@
-Landing page for proto-vima.gr, educational content for Greek people fegarding finances
+Landing page for proto-vima.gr, educational content for Greek people regarding finances and investment
