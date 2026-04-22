@@ -477,14 +477,15 @@
       <div class="section-label">Τελευταίο Βίντεο</div>
       <div class="video-embed">
         <iframe 
+          id="latest-video-iframe"
           src="https://www.youtube.com/embed/GpsDN0TnSrs" 
           title="Γιατί τα λεφτά στην τράπεζα δεν είναι ασφαλή — ΠΡΩΤΟ ΒΗΜΑ EP01"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen>
         </iframe>
       </div>
-      <p class="video-title">Γιατί τα λεφτά στην τράπεζα δεν είναι «ασφαλή»</p>
-      <p class="video-meta">Επεισόδιο 01 · Σειρά: Μύθοι & Αλήθειες</p>
+     <p class="video-title" id="latest-video-title">Γιατί τα λεφτά στην τράπεζα δεν είναι «ασφαλή»</p>
+      <p class="video-meta" id="latest-video-meta">Επεισόδιο 01 · Σειρά: Μύθοι & Αλήθειες</p>
     </div>
   </section>
 
@@ -681,6 +682,39 @@
   </footer>
 
 </div>
+
+<script>
+(function() {
+  const API_KEY = 'AIzaSyDtcADHAv7_cidV9D74LjHPCa_dYCyY5d8';
+  const CHANNEL_ID = 'UCfHFf_Jkmh7Edkt6737tNWw';
+
+  function parseDuration(d) {
+    var m = d.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+    return m ? (parseInt(m[1]||0)*3600 + parseInt(m[2]||0)*60 + parseInt(m[3]||0)) : 0;
+  }
+
+  fetch('https://www.googleapis.com/youtube/v3/search?key=' + API_KEY + '&channelId=' + CHANNEL_ID + '&part=snippet&order=date&type=video&maxResults=10')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data.items || !data.items.length) return;
+      var ids = data.items.map(function(i) { return i.id.videoId; }).join(',');
+      return fetch('https://www.googleapis.com/youtube/v3/videos?key=' + API_KEY + '&id=' + ids + '&part=contentDetails,snippet');
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var episodes = data.items.filter(function(v) { return parseDuration(v.contentDetails.duration) >= 120; });
+      if (!episodes.length) return;
+      var latest = episodes[0];
+      var iframe = document.getElementById('latest-video-iframe');
+      var title = document.getElementById('latest-video-title');
+      var meta = document.getElementById('latest-video-meta');
+      if (iframe) iframe.src = 'https://www.youtube.com/embed/' + latest.id;
+      if (title) title.textContent = latest.snippet.title;
+      if (meta) meta.textContent = '';
+    })
+    .catch(function(e) { console.error('PV:', e); });
+})();
+</script>
 
 </body>
 </html>
