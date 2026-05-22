@@ -39,7 +39,7 @@ plugins:
 # === Social links (χρησιμοποιούνται στα templates) ===
 social:
   youtube: "https://www.youtube.com/@protovima"
-  newsletter: "https://protovima.substack.com"
+  newsletter: "https://protovima.substack.com/subscribe"
   instagram: "https://instagram.com/protovima"
   twitter: "https://x.com/proto_vima"
 
