@@ -1,0 +1,55 @@
+---
+layout: page
+permalink: /episodes/
+title: "Όλα τα επεισόδια — ΠΡΩΤΟ ΒΗΜΑ"
+description: "Όλα τα επεισόδια του ΠΡΩΤΟΥ ΒΗΜΑΤΟΣ. Οικονομική παιδεία στα ελληνικά, ένα επεισόδιο τη φορά. Από τη φοβία της τράπεζας έως το πώς λειτουργεί όλο το σύστημα."
+---
+
+<div class="section-label">Αρχείο</div>
+<h1 class="page-title">Όλα τα επεισόδια</h1>
+<p class="page-intro">Κάθε επεισόδιο εδώ έχει την αναλυτική του έκδοση σε κείμενο, με πηγές και συνδέσμους. Διάβασε, ή δες το βίντεο. Όπως σου βολεύει.</p>
+
+{% assign s1 = site.episodes | where: "season", 1 | sort: "episode_number" %}
+{% assign s2 = site.episodes | where: "season", 2 | sort: "episode_number" %}
+
+{% if s1.size > 0 %}
+<section class="season-block">
+  <h2 class="season-title">Season 1 — Θεμέλια</h2>
+  <p class="season-desc">Από τη φοβία της τράπεζας έως το πρώτο σου broker account.</p>
+  <div class="ep-list">
+    {% for ep in s1 %}
+    <a class="ep-card" href="{{ ep.url | relative_url }}">
+      <span class="ep-card-num">EP{{ ep.episode_number }}</span>
+      <span class="ep-card-info">
+        <span class="ep-card-title">{{ ep.title }}</span>
+        {% if ep.description %}<span class="ep-card-desc">{{ ep.description | truncate: 120 }}</span>{% endif %}
+      </span>
+      <span class="ep-card-arrow">→</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if s2.size > 0 %}
+<section class="season-block">
+  <h2 class="season-title">Season 2 — Από αρχάριος επενδυτής σε ενημερωμένο πολίτη</h2>
+  <p class="season-desc">Μηχανική επένδυσης, παγίδες της νοοτροπίας, και πώς λειτουργεί το οικονομικό σύστημα.</p>
+  <div class="ep-list">
+    {% for ep in s2 %}
+    <a class="ep-card" href="{{ ep.url | relative_url }}">
+      <span class="ep-card-num">EP{{ ep.episode_number }}</span>
+      <span class="ep-card-info">
+        <span class="ep-card-title">{{ ep.title }}</span>
+        {% if ep.description %}<span class="ep-card-desc">{{ ep.description | truncate: 120 }}</span>{% endif %}
+      </span>
+      <span class="ep-card-arrow">→</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if s1.size == 0 and s2.size == 0 %}
+<p class="empty-note">Τα άρθρα έρχονται σύντομα.</p>
+{% endif %}

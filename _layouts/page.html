@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <div class="ambient"></div>
+
+  <div class="page">
+    {% include site-header.html %}
+
+    <main class="container page-main">
+      {{ content }}
+    </main>
+
+    {% include site-footer.html %}
+  </div>
+</body>
+</html>

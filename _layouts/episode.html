@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  {% include head.html %}
+
+  <!-- Article schema για το Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ page.title | jsonify }},
+    "description": {{ page.description | jsonify }},
+    "image": "https://i.ytimg.com/vi/{{ page.youtube_id }}/maxresdefault.jpg",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "author": { "@type": "Person", "name": "Μάρκος", "url": "https://proto-vima.gr/" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ΠΡΩΤΟ ΒΗΜΑ",
+      "logo": { "@type": "ImageObject", "url": "https://proto-vima.gr/apple-touch-icon.png" }
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
+    "inLanguage": "el-GR"
+  }
+  </script>
+</head>
+<body>
+  <div class="ambient"></div>
+
+  <div class="page">
+    {% include site-header.html %}
+
+    <article class="article container">
+      <div class="article-meta">
+        <span class="ep-badge">EP{{ page.episode_number }}</span>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time>
+        {% if page.series %}<span class="article-series">{{ page.series }}</span>{% endif %}
+      </div>
+
+      <h1 class="article-title">{{ page.title }}</h1>
+
+      {% if page.description %}
+        <p class="article-lede">{{ page.description }}</p>
+      {% endif %}
+
+      {% if page.youtube_id %}
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/{{ page.youtube_id }}"
+          title="{{ page.title | escape }}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+      {% endif %}
+
+      <div class="article-body">
+        {{ content }}
+      </div>
+
+      {% include newsletter-cta.html %}
+      {% include episode-nav.html %}
+
+      <p class="back-to-all"><a href="/episodes/">← Όλα τα επεισόδια</a></p>
+    </article>
+
+    {% include site-footer.html %}
+  </div>
+</body>
+</html>

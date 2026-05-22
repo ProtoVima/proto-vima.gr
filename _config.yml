@@ -1,0 +1,54 @@
+# === ΠΡΩΤΟ ΒΗΜΑ — Jekyll config ===
+# Το index.html δεν έχει front matter, οπότε το Jekyll το σερβίρει αυτούσιο.
+# Αυτό το config αναλαμβάνει ΜΟΝΟ τα νέα άρθρα στο _episodes/.
+
+title: "ΠΡΩΤΟ ΒΗΜΑ"
+description: "Χρηματοοικονομικός αλφαβητισμός για Έλληνες. Εκπαίδευση, όχι συμβουλή."
+url: "https://proto-vima.gr"
+lang: "el"
+
+author:
+  name: "Μάρκος"
+
+# Markdown engine
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# === Collections ===
+collections:
+  episodes:
+    output: true
+    permalink: /episodes/:name/
+
+# === Defaults ===
+# Κάθε αρχείο στο _episodes/ παίρνει αυτόματα το episode layout.
+defaults:
+  - scope:
+      path: ""
+      type: "episodes"
+    values:
+      layout: "episode"
+
+# === Plugins (όλα whitelisted στο GitHub Pages, δεν χρειάζονται GitHub Actions) ===
+plugins:
+  - jekyll-feed       # auto RSS feed στο /feed.xml
+  - jekyll-sitemap    # auto sitemap στο /sitemap.xml
+  - jekyll-seo-tag    # auto meta tags, Open Graph, Twitter cards
+
+# === Social links (χρησιμοποιούνται στα templates) ===
+social:
+  youtube: "https://www.youtube.com/@protovima"
+  newsletter: "https://protovima.substack.com"
+  instagram: "https://instagram.com/protovima"
+  twitter: "https://x.com/proto_vima"
+
+# === Exclude από το build ===
+# Το EPISODE-TEMPLATE.md μένει στο repo για copy-paste αλλά δεν χτίζεται.
+exclude:
+  - README.md
+  - EPISODE-TEMPLATE.md
+  - SETUP.md
+  - ADD-TO-INDEX-snippet.html
+  - Gemfile
+  - Gemfile.lock

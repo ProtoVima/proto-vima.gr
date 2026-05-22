@@ -1,0 +1,27 @@
+{% assign eps = site.episodes | sort: "episode_number" %}
+<nav class="episode-nav">
+  {% for ep in eps %}
+    {% if ep.episode_number == page.episode_number %}
+      {% assign prev_i = forloop.index0 | minus: 1 %}
+      {% assign next_i = forloop.index0 | plus: 1 %}
+
+      {% if prev_i >= 0 %}
+        {% assign p = eps[prev_i] %}
+        <a class="nav-link nav-prev" href="{{ p.url | relative_url }}">
+          <span class="nav-dir">← Προηγούμενο</span>
+          <span class="nav-ep">EP{{ p.episode_number }} · {{ p.title | truncate: 38 }}</span>
+        </a>
+      {% else %}
+        <span class="nav-link nav-empty"></span>
+      {% endif %}
+
+      {% if next_i < eps.size %}
+        {% assign n = eps[next_i] %}
+        <a class="nav-link nav-next" href="{{ n.url | relative_url }}">
+          <span class="nav-dir">Επόμενο →</span>
+          <span class="nav-ep">EP{{ n.episode_number }} · {{ n.title | truncate: 38 }}</span>
+        </a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</nav>
