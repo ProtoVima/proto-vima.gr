@@ -4,7 +4,7 @@ description: "Αγοράζεις χωρίς να ξέρεις, βάζεις τα
 episode_number: 8
 season: 1
 date: 2026-06-03
-youtube_id: "REPLACE_EP08_YOUTUBE_ID"
+youtube_id: "d03zUczJoxQ"
 series: "Podcast / Ιστορίες"
 ---
 
