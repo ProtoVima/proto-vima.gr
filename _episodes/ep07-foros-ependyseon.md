@@ -4,7 +4,7 @@ description: "Φορολογία επενδύσεων στην Ελλάδα αν
 episode_number: 7
 season: 1
 date: 2026-05-27
-youtube_id: "REPLACE_EP07_YOUTUBE_ID"
+youtube_id: "TXVYWg0qf38"
 series: "Ελληνική Πραγματικότητα"
 ---
 
